@@ -1,11 +1,16 @@
 from flask import Flask, jsonify
+from flask_cors import CORS
+from flask import request
+
 import pandas as pd
+
 from services.insights import generate_insights
 from models.predictors import train_model, predict_overspending
-from flask import request
 from services.chatbot import generate_response
 
 app = Flask(__name__)
+
+CORS(app)
 
 @app.route('/')
 def home():

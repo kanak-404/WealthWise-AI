@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WealthWise AI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1>💰 WealthWise AI Dashboard</h1>
+
+    <div id="summary">
+        <h2>Total Spending: ₹<span id="total"></span></h2>
+    </div>
+
+    <div id="prediction" class="card"></div>
+
+    <div class="card">
+        <h3>Category Breakdown</h3>
+        <ul id="categories"></ul>
+    </div>
+
+    <div class="card">
+        <h3>Insights</h3>
+        <ul id="insights"></ul>
+    </div>
+
+    <div class="card">
+        <h3>Ask AI Advisor</h3>
+        <input type="text" id="question" placeholder="Ask something...">
+        <button onclick="askAI()">Ask</button>
+        <p id="answer"></p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
