@@ -2,6 +2,8 @@ from flask import Flask, jsonify
 import pandas as pd
 from services.insights import generate_insights
 from models.predictors import train_model, predict_overspending
+from flask import request
+from services.chatbot import generate_response
 
 app = Flask(__name__)
 
@@ -34,6 +36,32 @@ def summary():
         "insights": insights,
         "prediction": "Overspending likely ⚠️" if prediction else "Spending under control ✅",
         "prediction_reason": f"Daily spending above average threshold ₹{int(threshold)}"
+    })
+
+@app.route('/chat', methods=['POST'])
+def chat():
+    df = pd.read_csv('../data/sample_transactions.csv')
+
+    total = df['amount'].sum()
+
+    # Reuse prediction logic
+    model, threshold = train_model(df)
+    prediction_flag = predict_overspending(model, 20, 1800, 0)
+
+    prediction = "Overspending likely ⚠️" if prediction_flag else "Spending under control ✅"
+
+    context = {
+        "total_spending": int(total),
+        "prediction": prediction
+    }
+
+    user_question = request.json.get("question")
+
+    response = generate_response(user_question, context)
+
+    return jsonify({
+        "question": user_question,
+        "answer": response
     })
 
 if __name__ == '__main__':
