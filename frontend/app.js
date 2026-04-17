@@ -6,6 +6,7 @@ fetch(`${API_URL}/summary`)
 .then(data => {
 
     document.getElementById("total").innerText = data.total_spending;
+    document.getElementById("score").innerText = data.financial_health_score + "/100";
 
     // Prediction
     document.getElementById("prediction").innerText = data.prediction;
@@ -41,5 +42,15 @@ function askAI() {
     .then(res => res.json())
     .then(data => {
         document.getElementById("answer").innerText = data.answer;
+    });
+}
+
+function simulate() {
+    fetch(`${API_URL}/simulate`, {
+        method: "POST"
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("simulation_result").innerText = data.message;
     });
 }
