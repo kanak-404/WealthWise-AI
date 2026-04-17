@@ -35,14 +35,17 @@ def summary():
 
     prediction = predict_overspending(model, current_day, current_spend, is_weekend)
 
+    score = calculate_health_score(total)
+
     return jsonify({
         "total_spending": int(total),
         "category_breakdown": by_category,
         "insights": insights,
         "prediction": "Overspending likely ⚠️" if prediction else "Spending under control ✅",
-        "prediction_reason": f"Daily spending above average threshold ₹{int(threshold)}"
+        "prediction_reason": f"Daily spending above average threshold ₹{int(threshold)}",
+        "financial_health_score": score
     })
-
+        
 @app.route('/chat', methods=['POST'])
 def chat():
     df = pd.read_csv('../data/sample_transactions.csv')
@@ -68,6 +71,25 @@ def chat():
         "question": user_question,
         "answer": response
     })
+
+@app.route('/simulate', methods=['POST'])
+def simulate():
+    df = pd.read_csv('../data/sample_transactions.csv')
+
+    food_spend = df[df['category'] == 'Food']['amount'].sum()
+
+    reduction_percent = 20  # fixed for now
+    savings = int(food_spend * reduction_percent / 100)
+
+    return jsonify({
+        "message": f"If you reduce food spending by {reduction_percent}%, you can save ₹{savings} per month."
+    })
+
+def calculate_health_score(total_spending):
+    # Assume monthly budget = 20000 (you can tweak)
+    budget = 20000
+    score = 100 - (total_spending / budget * 100)
+    return max(0, min(100, int(score)))
 
 if __name__ == '__main__':
     app.run(debug=True)
