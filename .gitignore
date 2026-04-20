@@ -1,5 +1,31 @@
-venv/
+# Python cache
 __pycache__/
 *.pyc
-.env
-database/
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.env/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Model files (optional: include if small)
+# model/model.pkl
+
+# Data files (optional)
+# data/*.csv
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
