@@ -11,8 +11,11 @@
 Unlike traditional tools that only track expenses or predict outcomes, WealthWise AI goes further:
 
 > ✅ It analyzes your financial behavior
+
 > ✅ Predicts credit approval chances
+
 > ✅ Simulates improvements
+
 > ✅ Provides actionable financial guidance
 
 ---
@@ -132,7 +135,7 @@ backend/
 ### 1. Clone the repository
 
 ```
-git clone <https://github.com/kanak-404/WealthWise-AI>
+git clone https://github.com/kanak-404/WealthWise-AI
 cd backend
 ```
 
