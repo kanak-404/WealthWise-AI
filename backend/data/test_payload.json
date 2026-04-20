@@ -1,0 +1,11 @@
+{
+  "income": 20000,
+  "transactions": [
+    {"description": "Zomato order", "amount": 500},
+    {"description": "Uber ride", "amount": 800},
+    {"description": "Amazon shopping", "amount": 4000},
+    {"description": "Electricity bill", "amount": 1500},
+    {"description": "Swiggy order", "amount": 700},
+    {"description": "Fuel", "amount": 1200}
+  ]
+}
